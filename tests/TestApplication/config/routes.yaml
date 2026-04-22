@@ -1,0 +1,5 @@
+sylius_seo_url_shop:
+    resource: "@SyliusSeoUrlPlugin/config/shop_routing.php"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$

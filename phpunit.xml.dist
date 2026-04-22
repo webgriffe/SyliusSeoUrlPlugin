@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    colors="true"
+    bootstrap="vendor/sylius/test-application/config/bootstrap.php"
+>
+    <php>
+        <server name="KERNEL_CLASS" value="Sylius\TestApplication\Kernel" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true"/>
+        <env name="APP_SECRET" value="''" />
+        <env name="APP_ENV" value="test"/>
+    </php>
 
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.6/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite name="SyliusSeoUrlPlugin Test Suite">
+        <testsuite name="all">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-
-    <php>
-        <server name="KERNEL_CLASS_PATH" value="/tests/Application/AppKernel.php" />
-        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
-    </php>
 </phpunit>
