@@ -2,7 +2,12 @@
 
 [![License](https://img.shields.io/packagist/l/stefandoorn/sylius-seo-url-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-seo-url-plugin)
 [![Version](https://img.shields.io/packagist/v/stefandoorn/sylius-seo-url-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-seo-url-plugin)
-[![Build Status](https://travis-ci.org/stefandoorn/SyliusSeoUrlPlugin.svg?branch=master)](https://travis-ci.org/stefandoorn/SyliusSeoUrlPlugin)
+
+## Requirements
+
+- PHP 8.2+
+- Sylius 2.2+
+- Symfony 7.4+
 
 ## Features
 
@@ -26,15 +31,7 @@ Combined with [disabling localised URLs](https://docs.sylius.com/en/latest/cookb
     composer require stefandoorn/sylius-seo-url-plugin
     ```
 
-2. Add plugin class to your `AppKernel`.
-
-    ```php
-    $bundles = [
-       new \StefanDoorn\SyliusSeoUrlPlugin\SyliusSeoUrlPlugin(),
-    ];
-    ```
-    
-    or to your `bundles.php`:
+2. Add plugin class to your `config/bundles.php`:
     
     ```php
     return [
@@ -43,37 +40,30 @@ Combined with [disabling localised URLs](https://docs.sylius.com/en/latest/cookb
     ];
     ```
 
-3. Import routing (to override default shop routing):
+3. Import routing (to override default shop routing) in your `config/routes.yaml`:
 
     ```yaml
     sylius_seo_url_shop:
         prefix: /{_locale}
-        resource: "@SyliusSeoUrlPlugin/Resources/config/shop_routing.yml"
+        resource: "@SyliusSeoUrlPlugin/config/shop_routing.php"
     ```
 
-    Make sure it's imported after (because it overrides default Sylius routes):
+    Make sure it's imported after the default Sylius shop routes:
     
     ```yaml
     sylius_shop:
-        resource: "@SyliusShopBundle/Resources/config/routing.yml"
+        resource: "@SyliusShopBundle/Resources/config/routing.php"
         prefix: /{_locale}
     ```
    
-   You can remove the prefix `/{_locale}` if you prefer url's without the prefix.
-   In this case, the import looks like this:
+   You can remove the prefix `/{_locale}` if you prefer URLs without the locale prefix:
    
    ```yaml
-       sylius_seo_url_shop:
-           resource: "@SyliusSeoUrlPlugin/Resources/config/shop_routing.yml"
+   sylius_seo_url_shop:
+       resource: "@SyliusSeoUrlPlugin/config/shop_routing.php"
    ```
 
-4. Import configuration:
-
-    ```yaml
-    - { resource: "@SyliusSeoUrlPlugin/Resources/config/config.yml" }
-    ```
-    
-5. Import repository method:
+4. Import repository method:
 
    The default `findOneByChannelAndSlug` for products is slow when used in a loop, therefore:
 
@@ -99,3 +89,8 @@ Combined with [disabling localised URLs](https://docs.sylius.com/en/latest/cookb
                     classes:
                         repository: StefanDoorn\SyliusSeoUrlPlugin\Repository\ProductRepository
         ``` 
+
+## Upgrade
+
+See [UPGRADE.md](UPGRADE.md) for upgrade instructions.
+
