@@ -1,4 +1,0 @@
-suites:
-    main:
-        namespace: StefanDoorn\SyliusSeoUrlPlugin
-        psr4_prefix: StefanDoorn\SyliusSeoUrlPlugin
