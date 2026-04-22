@@ -11,33 +11,25 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
-
-    /** @var ShowPageInterface */
-    private $showPage;
-
     public function __construct(
-        IndexPageInterface $indexPage,
-        ShowPageInterface $showPage
+        private readonly IndexPageInterface $indexPage,
+        private readonly ShowPageInterface $showPage,
     ) {
-        $this->indexPage = $indexPage;
-        $this->showPage = $showPage;
     }
 
     /**
      * @Then /^the taxon page response status code should be (?P<code>\d+)$/
      */
-    public function iShouldGetStatusCodeOnTaxonPage($code)
+    public function iShouldGetStatusCodeOnTaxonPage(int $code): void
     {
-        Assert::same((int) $code, $this->indexPage->getStatusCode());
+        Assert::same($code, $this->indexPage->getStatusCode());
     }
 
     /**
      * @Then /^the product page response status code should be (?P<code>\d+)$/
      */
-    public function iShouldGetStatusCodeOnProductPage($code)
+    public function iShouldGetStatusCodeOnProductPage(int $code): void
     {
-        Assert::same((int) $code, $this->showPage->getStatusCode());
+        Assert::same($code, $this->showPage->getStatusCode());
     }
 }

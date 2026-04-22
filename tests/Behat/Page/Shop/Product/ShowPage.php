@@ -8,6 +8,7 @@ use Sylius\Behat\Page\Shop\Product\ShowPage as BaseShowPage;
 
 final class ShowPage extends BaseShowPage implements ShowPageInterface
 {
+    #[\Override]
     public function getStatusCode(): int
     {
         return $this->getSession()->getStatusCode();
