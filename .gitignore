@@ -1,9 +1,19 @@
+.idea/
 /vendor/
+/var/
 /node_modules/
 /composer.lock
 
 /etc/build/*
 !/etc/build/.gitignore
 
+/compose.override.yml
+/docker-compose.override.yml
+
 /tests/Application/yarn.lock
-.idea/
+/tests/TestApplication/.env.local
+/tests/TestApplication/.env.*.local
+
+# Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
+/.php-version
+/php.ini
