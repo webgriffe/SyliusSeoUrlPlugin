@@ -10,23 +10,11 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class ProductSlugConditionChecker
 {
-    /** @var ProductExistsByChannelAndSlugAwareInterface */
-    private $productRepository;
-
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
     public function __construct(
-        ProductExistsByChannelAndSlugAwareInterface $productRepository,
-        ChannelContextInterface $channelContext,
-        LocaleContextInterface $localeContext
+        private readonly ProductExistsByChannelAndSlugAwareInterface $productRepository,
+        private readonly ChannelContextInterface $channelContext,
+        private readonly LocaleContextInterface $localeContext,
     ) {
-        $this->productRepository = $productRepository;
-        $this->channelContext = $channelContext;
-        $this->localeContext = $localeContext;
     }
 
     public function isProductSlug(string $slug): bool
@@ -34,7 +22,7 @@ final class ProductSlugConditionChecker
         return $this->productRepository->existsOneByChannelAndSlug(
             $this->channelContext->getChannel(),
             $this->localeContext->getLocaleCode(),
-            $slug
+            $slug,
         );
     }
 }

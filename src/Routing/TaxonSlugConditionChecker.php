@@ -9,18 +9,10 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class TaxonSlugConditionChecker
 {
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
     public function __construct(
-        TaxonRepositoryInterface $taxonRepository,
-        LocaleContextInterface $localeContext
+        private readonly TaxonRepositoryInterface $taxonRepository,
+        private readonly LocaleContextInterface $localeContext,
     ) {
-        $this->taxonRepository = $taxonRepository;
-        $this->localeContext = $localeContext;
     }
 
     public function isTaxonSlug(string $slug): bool

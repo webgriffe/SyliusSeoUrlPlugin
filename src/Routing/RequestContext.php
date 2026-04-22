@@ -9,19 +9,10 @@ use Symfony\Component\Routing\RequestContext as BaseRequestContext;
 
 final class RequestContext extends BaseRequestContext
 {
-    /** @var ProductSlugConditionChecker */
-    private $productSlugConditionChecker;
-
-    /** @var TaxonSlugConditionChecker */
-    private $taxonSlugConditionChecker;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
     public function __construct(
-        ProductSlugConditionChecker $productSlugConditionChecker,
-        TaxonSlugConditionChecker $taxonSlugConditionChecker,
-        LocaleContextInterface $localeContext,
+        private readonly ProductSlugConditionChecker $productSlugConditionChecker,
+        private readonly TaxonSlugConditionChecker $taxonSlugConditionChecker,
+        private readonly LocaleContextInterface $localeContext,
         string $baseUrl = '',
         string $method = 'GET',
         string $host = 'localhost',
@@ -29,12 +20,8 @@ final class RequestContext extends BaseRequestContext
         int $httpPort = 80,
         int $httpsPort = 443,
         string $path = '/',
-        string $queryString = ''
+        string $queryString = '',
     ) {
-        $this->productSlugConditionChecker = $productSlugConditionChecker;
-        $this->taxonSlugConditionChecker = $taxonSlugConditionChecker;
-        $this->localeContext = $localeContext;
-
         parent::__construct($baseUrl, $method, $host, $scheme, $httpPort, $httpsPort, $path, $queryString);
     }
 
@@ -53,7 +40,7 @@ final class RequestContext extends BaseRequestContext
         $slug = urldecode(ltrim($slug, '/'));
         $localeCode = $this->localeContext->getLocaleCode();
 
-        if (false === strpos($slug, $localeCode)) {
+        if (!str_contains($slug, $localeCode)) {
             return $slug;
         }
 

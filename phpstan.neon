@@ -1,22 +1,13 @@
-includes:
-    - vendor/phpstan/phpstan-doctrine/extension.neon
-    - vendor/phpstan/phpstan-symfony/extension.neon
-    - vendor/phpstan/phpstan-webmozart-assert/extension.neon
-
 parameters:
+    level: max
     reportUnmatchedIgnoredErrors: false
+    paths:
+        - src
+        - tests/Behat
 
-    symfony:
-        container_xml_path: tests/Application/var/cache/test/ApplicationTests_StefanDoorn_SyliusSeoUrlPlugin_Application_KernelTestDebugContainer.xml
-
-    excludes_analyse:
-        # Makes PHPStan crash
+    excludePaths:
         - 'src/DependencyInjection/Configuration.php'
 
-        # Test dependencies
-        - 'tests/Application/app/**.php'
-        - 'tests/Application/src/**.php'
-
     ignoreErrors:
-        - '/Parameter #1 $configuration of method Symfony\Component\DependencyInjection\Extension\Extension::processConfiguration() expects Symfony\Component\Config\Definition\ConfigurationInterface, Symfony\Component\Config\Definition\ConfigurationInterface|null given./'
-        - '/expects Sylius\\Component\\Core\\Model\\ChannelInterface, Sylius\\Component\\Channel\\Model\\ChannelInterface given/'
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
