@@ -10,7 +10,7 @@ return static function (RoutingConfigurator $routes): void {
         ->methods(['GET'])
         ->defaults([
             '_sylius' => [
-                'template' => '@SyliusShop/Product/index.html.twig',
+                'template' => '@SyliusShop/product/index.html.twig',
                 'grid' => 'sylius_shop_product',
             ],
         ])

@@ -10,7 +10,7 @@ return static function (RoutingConfigurator $routes): void {
         ->methods(['GET'])
         ->defaults([
             '_sylius' => [
-                'template' => '@SyliusShop/Product/show.html.twig',
+                'template' => '@SyliusShop/product/show.html.twig',
                 'repository' => [
                     'method' => 'findOneByChannelAndSlug',
                     'arguments' => [
