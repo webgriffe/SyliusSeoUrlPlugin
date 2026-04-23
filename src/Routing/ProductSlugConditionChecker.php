@@ -6,6 +6,7 @@ namespace StefanDoorn\SyliusSeoUrlPlugin\Routing;
 
 use StefanDoorn\SyliusSeoUrlPlugin\Repository\ProductExistsByChannelAndSlugAwareInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class ProductSlugConditionChecker
@@ -19,8 +20,11 @@ final class ProductSlugConditionChecker
 
     public function isProductSlug(string $slug): bool
     {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
         return $this->productRepository->existsOneByChannelAndSlug(
-            $this->channelContext->getChannel(),
+            $channel,
             $this->localeContext->getLocaleCode(),
             $slug,
         );
