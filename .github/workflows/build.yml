@@ -137,5 +137,7 @@ jobs:
                 if: failure()
                 with:
                     name: "Behat logs (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, Sylius ${{ matrix.sylius }})"
-                    path: etc/build/
+                    path: |
+                        etc/build/
+                        var/log/
                     if-no-files-found: ignore
